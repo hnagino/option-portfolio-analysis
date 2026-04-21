@@ -3,7 +3,7 @@ from scipy.stats import norm
 
 
 #define functions 
-def black_scholes(S, K, T, r, sigma, option_type='call'):
+def black_scholes_price(S, K, T, r, sigma, option_type='call'):
 
     """ 
     Calculate the theoretical price of a European call or put option using the Black-Scholes formula.
@@ -37,7 +37,7 @@ def black_scholes(S, K, T, r, sigma, option_type='call'):
 #function ends here
 
 
-def greeks(S, K, T, r, sigma, option_type='call'):
+def black_scholes_greeks(S, K, T, r, sigma, option_type='call'):
     """ 
     Calculate the Greeks (Delta, Gamma, Vega, Theta, Rho) for a European call or put option using the Black-Scholes formula.
     Parameters: 
@@ -85,18 +85,18 @@ if __name__ == "__main__":
     r = 0.05
     sigma = 0.25
 
-    call_price = black_scholes(S, K, T, r, sigma, "call")
-    put_price = black_scholes(S, K, T, r, sigma, "put")
+    call_price = black_scholes_price(S, K, T, r, sigma, "call")
+    put_price = black_scholes_price(S, K, T, r, sigma, "put")
 
     print(f"Call Price: ${call_price:.4f}")
     print(f"Put Price:  ${put_price:.4f}")
 
     print("\n--- CALL GREEKS ---")
-    call_greeks = greeks(S, K, T, r, sigma, "call")
+    call_greeks = black_scholes_greeks(S, K, T, r, sigma, "call")
     for key, value in call_greeks.items():
         print(f"  {key:10}: {value}")
 
     print("\n--- PUT GREEKS ---")
-    put_greeks = greeks(S, K, T, r, sigma, "put")
+    put_greeks = black_scholes_greeks(S, K, T, r, sigma, "put")
     for key, value in put_greeks.items():
         print(f"  {key:10}: {value}")
